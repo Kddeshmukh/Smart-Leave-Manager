@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Welcome, <span th:text="${user.name}">Student Name</span>!</h1>
+    <a th:href="@{/logout}">Logout</a>
+</header>
+
+<section>
+    <h2>Your Leave Requests</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="leave : ${leaves}">
+            <td th:text="${leave.fromDate}">2025-01-01</td>
+            <td th:text="${leave.toDate}">2025-01-05</td>
+            <td th:text="${leave.reason}">Reason</td>
+            <td th:text="${leave.status}">Pending</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <a th:href="@{/student/apply}">Apply for Leave</a>
+</section>
+</body>
+</html>

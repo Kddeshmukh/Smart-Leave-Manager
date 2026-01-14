@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Welcome, <span th:text="${user.name}">Teacher Name</span></h1>
+    <a th:href="@{/logout}">Logout</a>
+</header>
+
+<h2>All Leave Requests</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Student</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="leave : ${leaves}">
+        <td th:text="${leave.id}">1</td>
+        <td th:text="${leave.student != null ? leave.student.name : 'N/A'}">Student Name</td>
+        <td th:text="${leave.fromDate}">2025-09-26</td>
+        <td th:text="${leave.toDate}">2025-09-28</td>
+        <td th:text="${leave.reason}">Reason</td>
+        <td th:text="${leave.status}">PENDING</td>
+
+
+        <td>
+            <form th:action="@{'/teacher/approve/' + ${leave.id}}" method="post" style="display:inline">
+                <button type="submit">Approve</button>
+            </form>
+            <form th:action="@{'/teacher/reject/' + ${leave.id}}" method="post" style="display:inline">
+                <button type="submit">Reject</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
